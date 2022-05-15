@@ -17,28 +17,32 @@ def find_delta_Y(index, nodes, degree):
     return find_delta_Y(index + 1, nodes, degree - 1) - find_delta_Y(index, degree - 1)
 
 
-def find_T_factor(nodes, index, x_arg):
-    h = nodes[1][0] - nodes[0][0]
-    t_fun = lambda x: (x - nodes[0][0]) / h
-    term_fun = None
-    for k in range(1, index + 1):
-        term_fun = lambda x: term_fun(x) * (t_fun(x) - k + 1) / k
-    return term_fun(x_arg)
-
+# def newton(nodes, x_arg):
+#     n = len(nodes)
+#     N_fun = lambda x: nodes[0][1]
+#     h = nodes[1][0] - nodes[0][0]
+#     t_fun = lambda x: (x - nodes[0][0]) / h
+#
+#     for i in range(1, n):
+#         term_fun = lambda x: find_delta_Y(0, nodes, i)
+#
+#         for k in range(1, i + 1):
+#             term_fun = lambda x: term_fun(x) * (t_fun(x) - k + 1) / k
+#
+#         N_fun = lambda x: N_fun(x) + term_fun(x)
+#     return N_fun
 
 def newton(nodes, x_arg):
     n = len(nodes)
-    N_fun = lambda x: x
-        # nodes[0][1]
+    N_fun = lambda x: nodes[0][1]
+    h = nodes[1][0] - nodes[0][0]
+    t_fun = lambda x: (x - nodes[0][0]) / h
 
     for i in range(1, n):
-        print(i)
-        N_fun = lambda x: N_fun(x)
+        term_fun = lambda x: find_delta_Y(0, nodes, i)
 
-    for i in range(1, n):
-        delta_Y = find_delta_Y(0, nodes, i)
+        for k in range(1, i + 1):
+            term_fun = lambda x: term_fun(x) * (t_fun(x) - k + 1) / k
 
-        # N_fun = lambda x: N_fun(x)
-                          # + delta_Y
-                          # * find_T_factor(nodes, i, x)
+        N_fun = lambda x: N_fun(x) + term_fun(x)
     return N_fun

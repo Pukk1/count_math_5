@@ -1,3 +1,33 @@
+import math
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+def paint(method, nodes, default_fun, searched_x, searched_y):
+    x = np.arange(nodes[0][0], nodes[len(nodes) - 1][0] + 0.01, 0.01)
+    ax = plt.gca()
+
+    computed_y = [method(nodes, i) for i in x]
+    ax.plot(x, computed_y, "red", linewidth=1.5)
+    # computed_y = [method(nodes, node[0]) for node in nodes]
+    # computed_x = [node[0] for node in nodes]
+    # plt.plot(computed_x, computed_y, 'o', color='red')
+
+    if default_fun is not None:
+        computed_default_y = [default_fun(i) for i in x]
+        ax.plot(x, computed_default_y, "blue", linewidth=1.5)
+    else:
+        nodes_x = [node[0] for node in nodes]
+        nodes_y = [node[1] for node in nodes]
+        plt.plot(nodes_x, nodes_y, 'o', color='blue')
+
+    plt.plot(searched_x, searched_y, 'o', color='black')
+
+    plt.xlabel('x - axis')
+    plt.show()
+
+
 def user_input():
     n = int(input("Введите количество узлов:"))
     nodes = [[0 for x in range(2)] for y in range(n)]

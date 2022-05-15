@@ -1,9 +1,6 @@
-from input_output import user_input
-from mrthods import lagrange, newton
-import sys
+from input_output import user_input, paint
+from mrthods import lagrange, newton, default_newton
 
 if __name__ == '__main__':
-    sys.setrecursionlimit(1500)
-    (n, nodes, x_arg, example_fun) = user_input()
-    N = newton(nodes, x_arg)
-    print(N(0.35))
+    (n, nodes, x, example_fun) = user_input()
+    paint(default_newton, nodes, None, x, default_newton(nodes, x))

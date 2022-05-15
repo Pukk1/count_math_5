@@ -38,3 +38,20 @@ def newton(nodes, x):
             temp = temp * (t - k + 1) / k
         N = N + temp
     return N
+
+
+# def default_newton(nodes, x_arg):
+#     n = len(nodes)
+#     N = nodes[0][1]
+#     h = nodes[1][0] - nodes[0][0]
+#     t = (x_arg - nodes[0][0]) / h
+#
+#     for i in range(1, n):
+#         term_fun = find_delta_Y(0, nodes, i)
+#
+#         for k in range(1, i + 1):
+#             term_fun = term_fun * (t - k + 1) / k
+#
+#         N = N + term_fun
+#     return N
+
